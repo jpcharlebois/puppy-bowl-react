@@ -41,3 +41,11 @@ body > div {
   align-items: center;
   justify-content: center;
 }
+
+.players {
+  width: 200px;
+}
+
+.img-bttn-div > img {
+  width: 100%;
+}
