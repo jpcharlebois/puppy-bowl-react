@@ -19,7 +19,26 @@ export async function fetchSinglePlayer(playerId) {
         const response = await fetch(fetchSinglePlayerUrl);
         const result = await response.json();
         console.log("fetch ", result);
-        return result.data.players;
+        return result.data.player;
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+}
+
+export async function addNewPlayer(playerObj) {
+    try {
+        const addNewPlayerUrl = `${BASE_URL}/players`;
+        const response = await fetch(addNewPlayerUrl, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(playerObj)
+        });
+        const result = await response.json();
+        console.log("submit response: ", result);
     } catch (error) {
         console.log(error);
         return error;
