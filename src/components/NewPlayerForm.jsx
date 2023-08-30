@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import { addNewPlayer } from '../api/ajaxHelpers';
 
-const NEW_PLAYER_URL = '';
-
 export default function NewPlayerForm(){
     const [name, setName] = useState("");
     const [breed, setBreed] = useState("");
@@ -26,7 +24,7 @@ export default function NewPlayerForm(){
 
     return (
     <> 
-      <div className='sign-up'>
+      <div className='new-player'>
         <form onSubmit={handleSubmit}>
             <label>
                 Name: 
