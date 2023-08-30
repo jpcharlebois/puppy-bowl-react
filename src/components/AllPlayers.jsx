@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { fetchAllPlayers } from '../api/ajaxHelpers'
+import { fetchAllPlayers, removePlayer } from '../api/ajaxHelpers'
 import { useNavigate } from 'react-router-dom'
 
 
@@ -18,6 +18,7 @@ export default function AllPlayers() {
           <div className="img-bttn-div">
             <img src={player.imageUrl} />
             <button onClick = {() => navigate(`/players/${player.id}`)} >See Details</button>
+            <button onClick={() => handleDelete(player.id)} >Remove</button>
           </div>
         </div>
       )
@@ -34,6 +35,12 @@ export default function AllPlayers() {
     allPlayersHandler();
   }, [])
   
+  const handleDelete = async (playerId) => {
+    await removePlayer(playerId);
+    const returnPlayers = await fetchAllPlayers();
+    setPlayers(returnPlayers);
+  }
+
   return (
     <div>
       {renderAllPlayers()}

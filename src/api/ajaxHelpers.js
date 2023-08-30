@@ -44,3 +44,22 @@ export async function addNewPlayer(playerObj) {
         return error;
     }
 }
+
+export async function removePlayer(playerId) {
+    try {
+        console.log("Deleting Player: ", playerId);
+        const deletePlayer = `${BASE_URL}/players/${playerId}`;
+        const response = await fetch(deletePlayer, {
+            method: 'DELETE'
+        });
+        console.log("removed response: ", response);
+        const result = await response.json();
+        console.log("removed Player :", result);
+        return result.data.player;
+    } catch (err) {
+        console.error(
+            `Whoops, trouble removing player #${playerId} from the roster!`,
+            err
+        );
+    }
+};
