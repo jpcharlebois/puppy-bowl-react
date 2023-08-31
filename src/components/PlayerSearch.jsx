@@ -3,11 +3,21 @@ import { fetchAllPlayers } from "../api/ajaxHelpers"
 
 export default function PlayerSearch() {
   const [players, setPlayers] = useState([]);
-     const [query, setquery] = useState('')
      const [state, setstate] = useState({
         query: '',
         list: []
       })
+
+      const handleChange = async (e) => {
+        const results = players.filter(player => {
+            if (e.target.value === "") return players
+            return player.name.toLowerCase().includes(e.target.value.toLowerCase())
+        })
+        setstate({
+            query: e.target.value,
+            list: results
+        })
+      }
 
       useEffect(() => {
         async function allPlayersHandler() {
@@ -17,18 +27,6 @@ export default function PlayerSearch() {
         }
         allPlayersHandler();
       }, [])
-
-     const handleChange = async (e) => {
-        const results = players.filter(player => {
-            if (e.target.value === "") return players
-            return player.name.toLowerCase().includes(e.target.value.toLowerCase())
-        })
-        setstate({
-            query: e.target.value,
-            list: results
-        })
-        setquery(e.target.value)
-     }
      return (
       <>
         <div>
